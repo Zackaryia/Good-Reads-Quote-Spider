@@ -3,3 +3,8 @@ quote_files/*/*
 quote_files/
 quote_files/*
 quote_files
+
+test.py
+quotes.db
+quotes.db-journal
+240k Quotes.db
