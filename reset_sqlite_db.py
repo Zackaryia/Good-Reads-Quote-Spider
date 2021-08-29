@@ -21,6 +21,7 @@ c.execute("""CREATE TABLE quotes (
     author text,
     tags text,
     likes int,
+    tweet_link text,
     link text
 )""")
 

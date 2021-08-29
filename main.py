@@ -63,12 +63,13 @@ class quote:
 		self.author = author
 		self.tags = json.dumps(tags).replace('"', ':') #Because SQLite does not support lists the tags are formatted as a string the replace is to make it easier to search the DB
 		self.likes = likes
+		self.tweet_link = None
 		self.link = link
 
 	def add_to_db(self, commit_changes=True):
 		c.execute("select * from quotes where link=?", (self.link,))
 		if c.fetchone() == None: #checks if quote is already in DB
-			c.execute("INSERT INTO quotes VALUES (:quote_string, :author, :tags, :likes, :link)", self.toJSON())
+			c.execute("INSERT INTO quotes VALUES (:quote_string, :author, :tags, :likes, :tweet_link, :link)", self.toJSON())
 			if commit_changes:
 				conn.commit()
 			return "Interted into DB"

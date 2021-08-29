@@ -8,3 +8,4 @@ test.py
 quotes.db
 quotes.db-journal
 240k Quotes.db
+__pycache__/
