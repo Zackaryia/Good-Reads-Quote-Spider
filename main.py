@@ -11,7 +11,8 @@ cooldown_between_page_scrapes = 0
 # Cache webpages on disc, Only recomended if you are bugtesting / developing, if you are trying to run a full scrape of good reads turn this off and reset the database.
 cache = False
 
-
+# Only insert quotes that are short (The authors name and quote has to be less than 277 charachters long)
+only_insert_short_quotes = True
 
 
 conn = sqlite3.connect('quotes.db')
@@ -127,8 +128,8 @@ def get_tag_quotes(tag):
 
 			author = author.split(',')[0]
 			quote_text, author = quote_text.strip(), author.strip()
-			
-			if not (len(quote_text) + len(author) + 3 > 280): # Checks quote and author name are not too long
+
+			if not only_insert_short_quotes or not (len(quote_text) + len(author) + 3 > 280): # Checks quote and author name are not too long
 				quote(quote_text, author, tags, likes, link).add_to_db(commit_changes=False)
 			
 			for tag_to_be_scraped in tags: #adding the tags to the lists of scraped and unscraped tags (the  spider part)
