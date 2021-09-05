@@ -128,7 +128,8 @@ def get_tag_quotes(tag):
 			author = author.split(',')[0]
 			quote_text, author = quote_text.strip(), author.strip()
 			
-			quote(quote_text, author, tags, likes, link).add_to_db(commit_changes=False)
+			if not (len(quote_text) + len(author) + 3 > 280): # Checks quote and author name are not too long
+				quote(quote_text, author, tags, likes, link).add_to_db(commit_changes=False)
 			
 			for tag_to_be_scraped in tags: #adding the tags to the lists of scraped and unscraped tags (the  spider part)
 				add_tag_to_scrape(tag_to_be_scraped, commit_changes=False)
